@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(  
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
@@ -20,16 +20,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddJwtServices(builder.Configuration);
 builder.Services.AddSwaggerServices();
 
+builder.Services.AddScoped<TestRepo.Service.Product.IService, TestRepo.Service.Product.Service>();
+builder.Services.AddScoped<TestRepo.Service.Seller.IService, TestRepo.Service.Seller.Service>();
+builder.Services.AddScoped<TestRepo.Service.Auth.IService, TestRepo.Service.Auth.Service>();
+builder.Services.AddScoped<TestRepo.Service.User.IService, TestRepo.Service.User.Service>();
+builder.Services.AddScoped<TestRepo.Service.Category.IService, TestRepo.Service.Category.Service>();
 builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
 
 builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 
 // Cuộc đời là một chuỗi các sự kiện,
-    // và chúng ta chỉ là những người diễn viên trong đó.
+// và chúng ta chỉ là những người diễn viên trong đó.
 // Hãy sống hết mình và tận hưởng từng khoảnh khắc!
 
 // Không ai mong các em pass và thành công hơn chính anh
-    // Vậy nên hãy cố gắng trở thành phiên bản tốt nhất nhé
+// Vậy nên hãy cố gắng trở thành phiên bản tốt nhất nhé
 
 var app = builder.Build();
 
